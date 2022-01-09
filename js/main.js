@@ -42,7 +42,6 @@ const checkEl = (player1, player2) => {
 }
 
 // Checa quem venceu
-
 const checkWinCodition = () => {
   let b1 = document.getElementById('block1');
   let b2 = document.getElementById('block2');
@@ -61,11 +60,9 @@ const checkWinCodition = () => {
     let b3Child = b3.childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
   if (b4.childNodes.length > 0 && b5.childNodes.length > 0 && b6.childNodes.length > 0) {
@@ -74,11 +71,9 @@ const checkWinCodition = () => {
     let b6Child = b6.childNodes[0].className;
   
     if (b4Child == 'x' && b5Child == 'x' && b6Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
     } else if (b4Child == 'o' && b5Child == 'o' && b6Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
   if (b7.childNodes.length > 0 && b8.childNodes.length > 0 && b9.childNodes.length > 0) {
@@ -87,11 +82,10 @@ const checkWinCodition = () => {
     let b9Child = b9.childNodes[0].className;
   
     if (b7Child == 'x' && b8Child == 'x' && b9Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
+
     } else if (b7Child == 'o' && b8Child == 'o' && b9Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
 
@@ -102,11 +96,9 @@ const checkWinCodition = () => {
     let b7Child = b7.childNodes[0].className;
   
     if (b1Child == 'x' && b4Child == 'x' && b7Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
     } else if (b1Child == 'o' && b4Child == 'o' && b7Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
   if (b2.childNodes.length > 0 && b5.childNodes.length > 0 && b8.childNodes.length > 0) {
@@ -115,11 +107,9 @@ const checkWinCodition = () => {
     let b8Child = b8.childNodes[0].className;
   
     if (b2Child == 'x' && b5Child == 'x' && b8Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
     } else if (b2Child == 'o' && b5Child == 'o' && b8Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
   if (b3.childNodes.length > 0 && b6.childNodes.length > 0 && b9.childNodes.length > 0) {
@@ -128,11 +118,9 @@ const checkWinCodition = () => {
     let b9Child = b9.childNodes[0].className;
   
     if (b3Child == 'x' && b6Child == 'x' && b9Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
     } else if (b3Child == 'o' && b6Child == 'o' && b9Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
 
@@ -143,11 +131,9 @@ const checkWinCodition = () => {
     let b9Child = b9.childNodes[0].className;
   
     if (b1Child == 'x' && b5Child == 'x' && b9Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
     } else if (b1Child == 'o' && b5Child == 'o' && b9Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
   if (b3.childNodes.length > 0 && b5.childNodes.length > 0 && b7.childNodes.length > 0) {
@@ -156,11 +142,9 @@ const checkWinCodition = () => {
     let b7Child = b7.childNodes[0].className;
   
     if (b3Child == 'x' && b5Child == 'x' && b7Child == 'x') {
-      // x
-      console.log('x Venceu');
+      declareWinner('x');
     } else if (b3Child == 'o' && b5Child == 'o' && b7Child == 'o') {
-      console.log("o Venceu");
-      // o
+      declareWinner('o');
     }
   }
 
@@ -173,7 +157,43 @@ const checkWinCodition = () => {
     }
 
     if (counter == 9) {
-      console.log('Deu velha')
+      declareWinner('Deu velha!');
     }
+  })
+}
+
+// Limpa o Jogo, declara vencedor e atualiza o placar
+const declareWinner = (winner) => {
+  let scoreboardX = document.querySelector("#scoreboard-1");
+  let scoreboardO = document.querySelector("#scoreboard-2");
+  let msg = '';
+
+  if (winner == 'x') {
+    scoreboardX.textContent = parseInt(scoreboardX.textContent) + 1;
+    msg = 'O jogador 1 Venceu!';
+  } else if (winner == 'o'){
+    scoreboardO.textContent = parseInt(scoreboardO.textContent) + 1;
+    msg = 'O jogador 2 Venceu!';
+  } else {
+    msg = 'Deu Velha!';
+  }
+
+  // Exibir mensagem
+  messageText.innerHTML = msg;
+  messageContainer.classList.remove('hide');
+
+  // Esconde mensagem 
+  setTimeout(() => {
+    messageContainer.classList.add('hide');
+  }, 2000);
+
+  // Zerar jogadas
+  player1 = 0; 
+  player2 = 0;
+
+  // Remove X / O
+  let boxsToRemove = document.querySelectorAll('.box > div');
+  boxsToRemove.forEach(item => {
+    item.parentNode.removeChild(item);
   })
 }
